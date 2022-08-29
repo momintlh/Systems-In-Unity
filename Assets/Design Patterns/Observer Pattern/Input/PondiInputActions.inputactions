@@ -1,0 +1,34 @@
+{
+    "name": "PondiInputActions",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "00c01026-6a3e-4075-8d54-86b05309a562",
+            "actions": [
+                {
+                    "name": "Hurt",
+                    "type": "Button",
+                    "id": "97f76284-123f-4bcc-b3ae-69e3ae8349a3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "761059a7-4098-42e7-9b70-7108815e1c91",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Hurt",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
