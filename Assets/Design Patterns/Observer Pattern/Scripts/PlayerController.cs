@@ -19,24 +19,26 @@ public class PlayerController : MonoBehaviour
     public static event TakeDamage takeDamage;
     public float damageAmount;
 
+    public bool isGrounded;
+
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // void OnEnable()
-    // {
-    //     MouseInput.OnLmbDown += HurtState;
-    //     MouseInput.OnLmbUp += IdleState;
-    // }
+    /* void OnEnable()
+     {
+         MouseInput.OnLmbDown += HurtState;
+         MouseInput.OnLmbUp += IdleState;
+     }
 
-    // void OnDisable()
-    // {
-    //     MouseInput.OnLmbDown += HurtState;
-    //     MouseInput.OnLmbUp += IdleState;
-    // }
-
+     void OnDisable()
+     {
+         MouseInput.OnLmbDown += HurtState;
+         MouseInput.OnLmbUp += IdleState;
+     }
+    */
 
     // Start is called before the first frame update
     void Start()
@@ -60,23 +62,32 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void HurtState(InputAction.CallbackContext context)
+    private void HurtState()
+    {
+        anim.CrossFade(Hurt, 0f, 0);
+        takeDamage?.Invoke(damageAmount);
+
+        if (isGrounded == false)
+            Jump();
+    }
+
+
+    public void ChangeState(InputAction.CallbackContext context)
     {
 
         if (context.performed)
         {
-            anim.CrossFade(Hurt, 0f, 0);
-            takeDamage?.Invoke(damageAmount);
-            Jump();
+            HurtState();
+
             Debug.Log("Hurt state!" + context.phase);
         }
         else
         {
             IdleState();
+
         }
 
     }
-
 
     //temp
     public void Jump()
@@ -84,6 +95,30 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
-    // TODO: create a health system and health bar 
+    
+
+
+
+/*
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Entered");
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+            
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        Debug.Log("Exited");
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+           
+        }
+    }
+    */
 
 }

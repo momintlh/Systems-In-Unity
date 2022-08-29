@@ -41,7 +41,7 @@ public class MouseInput : MonoBehaviour
         else
         {
             isMouseDown = false;
-            OnLmbUp?.Invoke(isMouseDown);
+            OnLmbUp?.Invoke(isMouseDown); 
         }
     }
 
